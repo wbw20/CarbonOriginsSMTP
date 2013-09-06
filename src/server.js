@@ -4,11 +4,15 @@ var express = require('express'),
 var app = express();
 
 app.get('/buy', function(req, res) {
-  res.send('going to be a list of buy orders');
+  res.send({
+    "message": 'going to be a list of buy orders'
+  });
 });
 
 app.get('/sell', function(req, res) {
-  res.send('going to be a list of sell orders');
+  res.send({
+    "message": 'going to be a list of sell orders'
+  });
 });
 
 app.listen(8080);
