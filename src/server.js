@@ -2,6 +2,7 @@ var express = require('express'),
     fs = require('fs');
 
 var app = express();
+app.use(express.bodyParser());
 
 app.get('/buy', function(req, res) {
   res.send({
