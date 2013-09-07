@@ -1,6 +1,5 @@
 var mysql = require('mysql'),
     fs = require('fs');
-var db = new sqlite3.Database(':memory:');
 
 function connect(callback) {
   fs.readFile('../conf/properties.json', function(properties) {
@@ -10,21 +9,26 @@ function connect(callback) {
       user     : json.user,
       password : json.password,
     });
+
+    connection.connect();
+    callback(connection);
   });
 }
 
 module.exports = Object.freeze({
   setup: function() {
-    db.run(
+    connect(function(connection) {
+      connection.query(
       'create table buy (' +
         'id integer primary key autoincrement, ' +
         'name text, ' +
         'price real);');
-    db.run(
-      'create table sell (' +
-        'id integer primary key autoincrement, ' +
-        'name text, ' +
-        'price real);');
+      connection.query(
+        'create table sell (' +
+          'id integer primary key autoincrement, ' +
+          'name text, ' +
+          'price real);');
+    });
   },
 
   /* Getters */
