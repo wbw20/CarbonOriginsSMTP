@@ -8,8 +8,10 @@ app.use(express.bodyParser());
 dao.setup();
 
 app.get('/buy', function(req, res) {
-  res.send({
-    "message": 'going to be a list of buy orders'
+  dao.buys(function(rows) {
+    res.send({
+      "buys": JSON.stringify(rows)
+    });
   });
 });
 
@@ -19,8 +21,10 @@ app.post('/buy', function(req, res) {
 });
 
 app.get('/sell', function(req, res) {
-  res.send({
-    "message": 'going to be a list of sell orders'
+  dao.sells(function(rows) {
+    res.send({
+      "sells": JSON.stringify(rows)
+    });
   });
 });
 

@@ -15,10 +15,14 @@ module.exports = Object.freeze({
       'insert into buy values (1, \'Will\', 3.50);  ' +
       'insert into sell values (1, \'Charles\', 4.25);');
   },
-  buys: function(options) {
-
+  buys: function(callback, options) {
+    db.all('select * from buy;', function(error, rows) {
+      callback(rows);
+    });
   },
-  sells: function(options) {
-
+  sells: function(callback, options) {
+    db.all('select * from sells;', function(error, rows) {
+      callback(rows);
+    });
   }
 });
