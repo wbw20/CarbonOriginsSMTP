@@ -14,6 +14,8 @@ module.exports = Object.freeze({
         'name text, ' +
         'price real);');
   },
+
+  /* Getters */
   buys: function(callback, options) {
     db.all('select * from buy;', function(error, rows) {
       callback(rows);
@@ -23,5 +25,13 @@ module.exports = Object.freeze({
     db.all('select * from sells;', function(error, rows) {
       callback(rows);
     });
+  },
+
+  /* Setters */
+  buy: function(entity, options) {
+    db.run('insert into buy values (' + entity.name +  ', ' + entity.price + ');');
+  },
+  sell: function(entity, options) {
+    db.run('insert into sell values (' + entity.name +  ', ' + entity.price + ');');
   }
 });
