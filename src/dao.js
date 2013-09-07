@@ -7,13 +7,12 @@ module.exports = Object.freeze({
       'create table buy (' +
         'id integer primary key autoincrement, ' +
         'name text, ' +
-        'price real);  ' +
+        'price real);');
+    db.run(
       'create table sell (' +
         'id integer primary key autoincrement, ' +
         'name text, ' +
-        'price real);  ' +
-      'insert into buy values (1, \'Will\', 3.50);  ' +
-      'insert into sell values (1, \'Charles\', 4.25);');
+        'price real);');
   },
   buys: function(callback, options) {
     db.all('select * from buy;', function(error, rows) {
