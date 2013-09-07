@@ -16,7 +16,10 @@ app.get('/buy', function(req, res) {
 });
 
 app.post('/buy', function(req, res) {
-  console.log(req.body);
+  dao.buy({
+    name: req.body.name,
+    price: req.body.price
+  });
   res.send(200);
 });
 
@@ -29,7 +32,7 @@ app.get('/sell', function(req, res) {
 });
 
 app.post('/sell', function(req, res) {
-  console.log(req.body);
+  dao.buy(req.body.name, req.body.price);
   res.send(200);
 });
 

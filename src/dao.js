@@ -1,5 +1,17 @@
-var sqlite3 = require('sqlite3');
+var sqlite3 = require('sqlite3'),
+    fs = require('fs');
 var db = new sqlite3.Database(':memory:');
+
+function connect(callback) {
+  fs.readFile('../conf/properties.json', function(properties) {
+    var json = JSON.parse(properties);
+    var connection = mysql.createConnection({
+      host     : json.host,
+      user     : json.user,
+      password : json.password,
+    });
+  });
+}
 
 module.exports = Object.freeze({
   setup: function() {
@@ -29,9 +41,10 @@ module.exports = Object.freeze({
 
   /* Setters */
   buy: function(entity, options) {
-    db.run('insert into buy values (' + entity.name +  ', ' + entity.price + ');');
+    console.log('insert into buy (name, price) values (' + entity.name +  ', ' + entity.price + ');');
+    db.run('insert into buy (name, price) values (' + entity.name +  ', ' + entity.price + ');');
   },
   sell: function(entity, options) {
-    db.run('insert into sell values (' + entity.name +  ', ' + entity.price + ');');
+    db.run('insert into sell (name, price) values (' + entity.name +  ', ' + entity.price + ');');
   }
 });
