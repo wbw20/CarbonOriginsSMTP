@@ -1,18 +1,17 @@
 var mysql = require('mysql'),
     fs = require('fs');
 
-function connect(callback) {
-  fs.readFile('../conf/properties.json', function(properties) {
-    var json = JSON.parse(properties);
-    var connection = mysql.createConnection({
-      host     : json.host,
-      user     : json.user,
-      password : json.password,
-    });
+var properties = JSON.parse(fs.readFileSync('../conf/properties.json'));
 
-    connection.connect();
-    callback(connection);
+function connect(callback) {
+  var connection = mysql.createConnection({
+    host     : json.host,
+    user     : json.user,
+    password : json.password,
   });
+
+  connection.connect();
+  callback(connection);
 }
 
 module.exports = Object.freeze({
