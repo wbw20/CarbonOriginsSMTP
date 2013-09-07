@@ -6,11 +6,11 @@ module.exports = Object.freeze({
     db.run('create table buy (' +
         'id integer primary key autoincrement, ' +
         'name text, ' +
-        'price real');
+        'price real);');
     db.run('create table sell (' +
         'id integer primary key autoincrement, ' +
         'name text, ' +
-        'price real');
+        'price real);');
   },
   seed: function() {
 

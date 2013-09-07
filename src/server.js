@@ -1,8 +1,11 @@
 var express = require('express'),
     fs = require('fs');
 
+var dao = require('./dao');
+
 var app = express();
 app.use(express.bodyParser());
+dao.setup();
 
 app.get('/buy', function(req, res) {
   res.send({
