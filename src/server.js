@@ -32,7 +32,10 @@ app.get('/sell', function(req, res) {
 });
 
 app.post('/sell', function(req, res) {
-  dao.buy(req.body.name, req.body.price);
+  dao.sell({
+    name: req.body.name,
+    price: req.body.price
+  });
   res.send(200);
 });
 
