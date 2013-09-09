@@ -41,7 +41,7 @@ module.exports = Object.freeze({
   },
   sells: function(callback, options) {
     connect(function(connection) {
-      connection.query('select * from sells;', function(error, rows) {
+      connection.query('select * from sell;', function(error, rows) {
         callback(rows);
       });
     });
