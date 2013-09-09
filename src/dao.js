@@ -33,13 +33,17 @@ module.exports = Object.freeze({
 
   /* Getters */
   buys: function(callback, options) {
-    db.all('select * from buy;', function(error, rows) {
-      callback(rows);
+    connect(function(connection) {
+      connection.query('select * from buy;', function(error, rows) {
+        callback(rows);
+      });
     });
   },
   sells: function(callback, options) {
-    db.all('select * from sells;', function(error, rows) {
-      callback(rows);
+    connect(function(connection) {
+      connection.query('select * from sells;', function(error, rows) {
+        callback(rows);
+      });
     });
   },
 
