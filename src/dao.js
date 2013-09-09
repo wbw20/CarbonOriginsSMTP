@@ -49,10 +49,13 @@ module.exports = Object.freeze({
 
   /* Setters */
   buy: function(entity, options) {
-    console.log('insert into buy (name, price) values (' + entity.name +  ', ' + entity.price + ');');
-    db.run('insert into buy (name, price) values (' + entity.name +  ', ' + entity.price + ');');
+    connect(function(connection) {
+      connection.query('insert into buy (name, price) values (\'' + entity.name +  '\', ' + entity.price + ');');
+    });
   },
   sell: function(entity, options) {
-    db.run('insert into sell (name, price) values (' + entity.name +  ', ' + entity.price + ');');
+    connect(function(connection) {
+        connection.query('insert into sell (name, price) values (\'' + entity.name +  '\', ' + entity.price + ');');
+    });
   }
 });
