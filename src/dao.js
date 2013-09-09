@@ -1,7 +1,7 @@
 var mysql = require('mysql'),
     fs = require('fs');
 
-var properties = JSON.parse(fs.readFileSync('../conf/properties.json'));
+var properties = JSON.parse(fs.readFileSync(__dirname + '/../conf/properties.json'));
 
 function connect(callback) {
   var connection = mysql.createConnection({
