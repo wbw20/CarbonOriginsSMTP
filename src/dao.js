@@ -20,12 +20,12 @@ module.exports = Object.freeze({
     connect(function(connection) {
       connection.query(
       'create table buy (' +
-        'id integer primary key autoincrement, ' +
+        'id integer primary key auto_increment, ' +
         'name text, ' +
         'price real);');
       connection.query(
         'create table sell (' +
-          'id integer primary key autoincrement, ' +
+          'id integer primary key auto_increment, ' +
           'name text, ' +
           'price real);');
     });
