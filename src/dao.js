@@ -5,9 +5,10 @@ var properties = JSON.parse(fs.readFileSync(__dirname + '/../conf/properties.jso
 
 function connect(callback) {
   var connection = mysql.createConnection({
-    host     : json.host,
-    user     : json.user,
-    password : json.password,
+    database : properties.database,
+    host     : properties.host,
+    user     : properties.username,
+    password : properties.password,
   });
 
   connection.connect();
