@@ -19,12 +19,12 @@ module.exports = Object.freeze({
   setup: function() {
     connect(function(connection) {
       connection.query(
-      'create table buy (' +
+      'create table if exists buy (' +
         'id integer primary key auto_increment, ' +
         'name text, ' +
         'price real);');
       connection.query(
-        'create table sell (' +
+        'create table if exists sell (' +
           'id integer primary key auto_increment, ' +
           'name text, ' +
           'price real);');
