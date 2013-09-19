@@ -52,10 +52,14 @@ module.exports = Object.freeze({
     connect(function(connection) {
       connection.query('insert into buy (name, price) values (\'' + entity.name +  '\', ' + entity.price + ');');
     });
+
+    return entity;
   },
   sell: function(entity, options) {
     connect(function(connection) {
         connection.query('insert into sell (name, price) values (\'' + entity.name +  '\', ' + entity.price + ');');
     });
+
+    return entity;
   }
 });

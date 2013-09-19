@@ -14,11 +14,10 @@ app.get('/buy', function(req, res) {
 });
 
 app.post('/buy', function(req, res) {
-  dao.buy({
+  res.send(dao.buy({
     name: req.body.name,
     price: req.body.price
-  });
-  res.send(200);
+  }));
 });
 
 app.get('/sell', function(req, res) {
@@ -28,11 +27,10 @@ app.get('/sell', function(req, res) {
 });
 
 app.post('/sell', function(req, res) {
-  dao.sell({
+  res.send(dao.sell({
     name: req.body.name,
     price: req.body.price
-  });
-  res.send(200);
+  }));
 });
 
 app.listen(8080);
