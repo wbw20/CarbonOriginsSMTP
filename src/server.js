@@ -23,7 +23,6 @@ var email  = emailjs.server.connect({
    password: credentials.email.password, 
    host:     credentials.email.host, 
    ssl:      credentials.email.ssl
-
 });
 
 var app = express();
