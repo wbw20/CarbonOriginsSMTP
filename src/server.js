@@ -27,7 +27,8 @@ var email  = emailjs.server.connect({
 
 var app = express();
 app.use(express.bodyParser());
-dao.setup();
+app.use(express.static(__dirname + '/static'));
+dao.setup();  
 
 app.get('/news', function(req, res) {
   dao.get(function(rows) {
@@ -45,9 +46,19 @@ app.post('/news', function(req, res) {
 });
 
 app.post('/email', function(req, res) {
-  dao.add({
-    name: req.body.name,
-    email: req.body.email
+  dao.get(function(rows) {
+    rows.forEach(function(row) {
+      email.send({
+        text:    req.body.text,
+        from:    "Carbon Origins Team <team@carbonorigins.com>", 
+        to:      row.email;
+        subject: req.body.subject;
+      }, function(error, message) {
+        if (error) {
+          console.log(error);
+        }
+      });
+    })
   });
 
   res.send(200);
