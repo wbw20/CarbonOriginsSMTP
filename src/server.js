@@ -1,6 +1,7 @@
 var express = require('express'),
     fs = require('fs'),
-    winston = require('winston');
+    winston = require('winston'),
+    emailjs = require('emailjs');
 
 var dao = require('./dao');
 
@@ -16,6 +17,15 @@ var logger = new (winston.Logger)({
   exitOnError: false
 });
 
+var credentials = JSON.parse(fs.readFileSync('conf/properties.json').toString());
+var email  = emailjs.server.connect({
+   user:     credentials.email.user, 
+   password: credentials.email.password, 
+   host:     credentials.email.host, 
+   ssl:      credentials.email.ssl
+
+});
+
 var app = express();
 app.use(express.bodyParser());
 dao.setup();
@@ -27,6 +37,15 @@ app.get('/news', function(req, res) {
 });
 
 app.post('/news', function(req, res) {
+  dao.add({
+    name: req.body.name,
+    email: req.body.email
+  });
+
+  res.send(200);
+});
+
+app.post('/email', function(req, res) {
   dao.add({
     name: req.body.name,
     email: req.body.email
