@@ -1,5 +1,6 @@
 var express = require('express'),
     fs = require('fs'),
+    ejs = require('ejs'),
     winston = require('winston'),
     emailjs = require('emailjs');
 
@@ -26,8 +27,11 @@ var email  = emailjs.server.connect({
 });
 
 var app = express();
+app.engine('.html', ejs.__express);
+app.use(express.static(__dirname + '/../static'));
 app.use(express.bodyParser());
-app.use(express.static(__dirname + '/static'));
+app.set('view engine', 'html');
+app.set('views', __dirname + '/../static');
 dao.setup();  
 
 app.get('/news', function(req, res) {
@@ -45,14 +49,18 @@ app.post('/news', function(req, res) {
   res.send(200);
 });
 
+app.get('/email', function(req, res) {
+  res.render('email');
+});
+
 app.post('/email', function(req, res) {
   dao.get(function(rows) {
     rows.forEach(function(row) {
       email.send({
         text:    req.body.text,
         from:    "Carbon Origins Team <team@carbonorigins.com>", 
-        to:      row.email;
-        subject: req.body.subject;
+        to:      row.email,
+        subject: req.body.subject
       }, function(error, message) {
         if (error) {
           console.log(error);
