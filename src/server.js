@@ -69,7 +69,7 @@ app.post('/email', function(req, res) {
     })
   });
 
-  res.send(200);
+  res.redirect('email');
 });
 
 app.listen(3000);
